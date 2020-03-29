@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>FCC: Technical Documentation Page</title>
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <header>ES6 Additions</header>
+    <ul>
+      <li><a href="#Let" class="nav-link">Let</a></li>
+      <li><a href="#Const" class="nav-link">Const</a></li>
+      <li><a href="#Arrow_Functions" class="nav-link">Arrow Functions</a></li>
+      <li><a href="#Rest_Function_Parameters" class="nav-link">Rest Function Parameters</a></li>
+      <li><a href="#Spread_Operator" class="nav-link">Spread Operator</a></li>
+      <li><a href="#Destructuring_Assignment" class="nav-link">Destructuring Assignment</a></li>
+      <li><a href="#Class_Syntax" class="nav-link">Class Syntax</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-doc">
+    <section id="Let" class="main-section">
+      <header>Let</header>
+      <article>
+        <p>With let you define a variable locally or globally depending on the scope.
+          Using the keyword var will not cause a variable to have local scope
+          even though it has been declared locally.<br />
+          The let keyword also prevents defining a keyword twice within a certain scope</p>
+        <code>let myvar = "global";
+          function test_let() {
+          let myvar = "local";
+          console.log("myvar local:",myvar)
+          }
+          console.log("myvar global:",myvar)
+        </code>
+      </article>
+    </section>
+    <section id="Const" class="main-section">
+      <header>Const</header>
+      <article>
+        <p>With const, just like <a href="#Let">let</a> you define a variable locally or globally depending on the
+          scope.<br />
+          The const keyword also prevents defining a keyword twice within a certain scope</p>
+        <p>Variables declared as const can't be changed afterwards
+        </p>
+        <code>const INCHTOCM = 2.54;
+          // how many centimeters is 2 inches
+          let cms = 2 * INCHTOCM;</code>
+        <ul>
+          <li>Note: elements of higher level const variables can be changed, like an array or object</li>
+          <li>Note: convention is to declare basic level const variables in uppercase
+        </ul>
+      </article>
+    </section>
+    <section id="Arrow_Functions" class="main-section">
+      <header>Arrow Functions</header>
+      <article>
+        <p>Arrow functions are used to write concise anonymous functions</p>
+        <p>In JavaScript, we often don't need to name our functions, especially when
+          passing a function as an argument to another function. Instead, we create inline
+          functions. We don't need to name these functions because we do not reuse them
+          anywhere else. To achieve this, we often use the following syntax:</p>
+        <code>const myFunc = function() {
+          const myVar = "value";
+          return myVar;
+          }
+        </code>
+        <p>ES6 provides a way to write functions like these in a more concise manner</p>
+        <code>const myFunc = () => {
+          const myVar = "value";
+          return myVar;
+          }
+        </code>
+        <p>When there is no function body, and only a return value,
+          arrow function syntax allows you to omit the keyword return
+          as well as the brackets surrounding the code. <br>
+          This helps simplify smaller functions into one-line statements:</p>
+        <code>const myFunc = () => "value";</code>
+      </article>
+    </section>
+    <section id="Rest_Function_Parameters" class="main-section">
+      <header>Rest Function Parameters</header>
+      <article>
+        <p>In order to help us create more flexible functions, ES6 introduces
+          the rest parameter for function parameters. With the rest parameter,
+          you can create functions that take a variable number of arguments.
+          These arguments are stored in an array that can be accessed later
+          from inside the function.</p>
+        <p>content</p>
+        <code>function howMany(...args) {
+          return "You have passed " + args.length + " arguments.";
+          }
+          console.log(howMany(0, 1, 2));
+          // You have passed 3 arguments.
+          console.log(howMany("string", null, [1, 2, 3], { }));
+          // You have passed 4 arguments.
+        </code>
+        <p>The rest parameter eliminates the need to check the args array
+          and allows us to apply map(), filter() and reduce() on
+          the parameters array</p>
+        <code>const sum = (x, y, z) => {
+          const args = [x, y, z];
+          return args.reduce((a, b) => a + b, 0);
+          }
+        </code>
+        <p>Can be changed to:</p>
+        <code>const sum = (...args) => args.reduce((a,b) => a + b, 0);
+          console.log(sum(1, 2, 3)); // 6
+        </code>
+      </article>
+    </section>
+    <section id="Spread_Operator" class="main-section">
+      <header>Spread Operator</header>
+      <article>
+        <p>Use the spread operator to evaluate arrays in-place</p>
+        <p>ES6 introduces the spread operator, which allows us to expand arrays and other
+          expressions in places where multiple parameters or elements are expected.<br>
+          The ES5 code below uses apply() to compute the maximum value in an array:</p>
+        <code>var arr = [6, 89, 3, 45];
+          var maximus = Math.max.apply(null, arr);
+          // returns 89</code>
+        <p>ES6 code uses the spread operator</p>
+        <code> const arr = [6, 89, 3, 45];
+          const maximus = Math.max(...arr); // returns 89
+        </code>
+      </article>
+    </section>
+    <section id="Destructuring_Assignment" class="main-section">
+      <header>Destructuring Assignment</header>
+      <article>
+        <p>Destructuring can be used to assign variables from objects or arrays</p>
+        <code>const HIGH_TEMPERATURES = {
+          yesterday: 75,
+          today: 77,
+          tomorrow: 80
+          };
+          const {today, tomorrow} = HIGH_TEMPERATURES;
+        </code>
+        <p>Destructuring an array</p>
+        <code>const [a, b] = [1, 2, 3, 4, 5, 6];
+          console.log(a, b); // 1, 2
+        </code>
+        <p>Destructuring an array and also using rest</p>
+        <code>const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+          console.log(a, b); // 1, 2
+          console.log(arr); // [3, 4, 5, 7]
+        </code>
+      </article>
+    </section>
+    <section id="Class_Syntax" class="main-section">
+      <header>Class Syntax</header>
+      <article>
+        <p>ES6 provides a new syntax to create objects, using the class keyword.</p>
+        <p>It should be noted that the class syntax is just syntax, and not a
+          full-fledged class-based implementation of an object-oriented paradigm, unlike
+          in languages such as Java, Python, Ruby, etc. In ES5, we usually define a
+          constructor function and use the new keyword to instantiate an object.<br>
+          ES5 code:
+        </p>
+        <code>var SpaceShuttle = function(targetPlanet){
+          this.targetPlanet = targetPlanet;
+          }
+          var zeus = new SpaceShuttle('Jupiter');</code>
+        <p>The class syntax simply replaces the constructor function creation:</p>
+        <code> class SpaceShuttle {
+          constructor(targetPlanet) {
+          this.targetPlanet = targetPlanet;
+          }
+          }
+          const zeus = new SpaceShuttle('Jupiter');
+        </code>
+        <ul>
+          <li>UpperCamelCase should be used by convention for ES6 class names, as in
+            SpaceShuttle used above.</li>
+          <li>The constructor method is a special method for creating and initializing an
+            object created with a class.</li>
+          <li>The "This" keyword is used to store and access intance variables of the class</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+
+</html>
